@@ -159,10 +159,9 @@ export class TaskNewComponent implements OnInit {
   template: `
     <div>
         <h3>{{ task?.title }}</h3> 
-        <button class='btn btn-xs' (click)="editingTask=!editingTask">Edit</button>
-        <button class='btn btn-xs' (click)="deleteTask()">Destroy</button>
+        <button class='btn btn-xs btn-primary' (click)="editingTask=!editingTask">Edit</button>
+        <button class='btn btn-xs btn-danger' (click)="deleteTask()">Destroy</button>
         <p>{{ task?.description }}</p>
-        <h4>Completion Status:</h4>
         <button (click)="task.completed = !task.completed" *ngIf='task.completed' class='btn btn-success'>Completed</button>
         <button (click)="task.completed = !task.completed" *ngIf='!task.completed' class='btn btn-warning'>Incomplete</button>
         <h5>Created on:{{task.created_at | date:'short' }}</h5>
@@ -194,15 +193,25 @@ export class TaskDetailsComponent implements OnInit {
   selector: 'task-list',
   template: `
     <div class='row'>
-        <div *ngFor='let task of tasks'>
-            <task-details 
-            class='col-xs-6'
-            *ngIf='!task.completed' 
-            [task]='task'></task-details>
+        <div class='col-xs-12'>
+            <hr>
+            <h2>Tasks</h2>
         </div>
         <div *ngFor='let task of tasks'>
             <task-details 
-            class='col-xs-6'
+            class='col-xs-4'
+            *ngIf='!task.completed' 
+            [task]='task'></task-details>
+        </div>
+    </div>
+    <div>
+        <div class='col-xs-12'>
+            <hr>
+            <h2>Completed Tasks</h2>
+        </div>
+        <div *ngFor='let task of tasks'>
+            <task-details 
+            class='col-xs-4'
             *ngIf='task.completed' 
             [task]='task'></task-details>
         </div>
@@ -226,11 +235,10 @@ export class TaskListComponent implements OnInit {
   template: `
     <div class='container'>
         <h1>Task List Application</h1>
-        <task-list></task-list>
         <task-new></task-new>
+        <task-list></task-list>
     </div>
-  `,
-  styles: ['* { outline: 1px dotted red;}']
+  `
 })
 export class AppComponent { }
 // #################################################################

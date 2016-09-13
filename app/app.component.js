@@ -153,7 +153,7 @@ var TaskDetailsComponent = (function () {
     TaskDetailsComponent = __decorate([
         core_1.Component({
             selector: 'task-details',
-            template: "\n    <div>\n        <h3>{{ task?.title }}</h3> \n        <button class='btn btn-xs' (click)=\"editingTask=!editingTask\">Edit</button>\n        <button class='btn btn-xs' (click)=\"deleteTask()\">Destroy</button>\n        <p>{{ task?.description }}</p>\n        <h4>Completion Status:</h4>\n        <button (click)=\"task.completed = !task.completed\" *ngIf='task.completed' class='btn btn-success'>Completed</button>\n        <button (click)=\"task.completed = !task.completed\" *ngIf='!task.completed' class='btn btn-warning'>Incomplete</button>\n        <h5>Created on:{{task.created_at | date:'short' }}</h5>\n        <h5>Last Updated on: {{task.updated_at | date:'short' }}</h5>\n        <task-edit *ngIf=\"editingTask\" [task]='task' ></task-edit>\n    </div>\n  "
+            template: "\n    <div>\n        <h3>{{ task?.title }}</h3> \n        <button class='btn btn-xs btn-primary' (click)=\"editingTask=!editingTask\">Edit</button>\n        <button class='btn btn-xs btn-danger' (click)=\"deleteTask()\">Destroy</button>\n        <p>{{ task?.description }}</p>\n        <button (click)=\"task.completed = !task.completed\" *ngIf='task.completed' class='btn btn-success'>Completed</button>\n        <button (click)=\"task.completed = !task.completed\" *ngIf='!task.completed' class='btn btn-warning'>Incomplete</button>\n        <h5>Created on:{{task.created_at | date:'short' }}</h5>\n        <h5>Last Updated on: {{task.updated_at | date:'short' }}</h5>\n        <task-edit *ngIf=\"editingTask\" [task]='task' ></task-edit>\n    </div>\n  "
         }), 
         __metadata('design:paramtypes', [TaskService])
     ], TaskDetailsComponent);
@@ -171,7 +171,7 @@ var TaskListComponent = (function () {
     TaskListComponent = __decorate([
         core_1.Component({
             selector: 'task-list',
-            template: "\n    <div class='row'>\n        <div *ngFor='let task of tasks'>\n            <task-details \n            class='col-xs-6'\n            *ngIf='!task.completed' \n            [task]='task'></task-details>\n        </div>\n        <div *ngFor='let task of tasks'>\n            <task-details \n            class='col-xs-6'\n            *ngIf='task.completed' \n            [task]='task'></task-details>\n        </div>\n    </div>\n  "
+            template: "\n    <div class='row'>\n        <div class='col-xs-12'>\n            <hr>\n            <h2>Tasks</h2>\n        </div>\n        <div *ngFor='let task of tasks'>\n            <task-details \n            class='col-xs-4'\n            *ngIf='!task.completed' \n            [task]='task'></task-details>\n        </div>\n    </div>\n    <div>\n        <div class='col-xs-12'>\n            <hr>\n            <h2>Completed Tasks</h2>\n        </div>\n        <div *ngFor='let task of tasks'>\n            <task-details \n            class='col-xs-4'\n            *ngIf='task.completed' \n            [task]='task'></task-details>\n        </div>\n    </div>\n  "
         }), 
         __metadata('design:paramtypes', [TaskService])
     ], TaskListComponent);
@@ -185,8 +185,7 @@ var AppComponent = (function () {
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
-            template: "\n    <div class='container'>\n        <h1>Task List Application</h1>\n        <task-list></task-list>\n        <task-new></task-new>\n    </div>\n  ",
-            styles: ['* { outline: 1px dotted red;}']
+            template: "\n    <div class='container'>\n        <h1>Task List Application</h1>\n        <task-new></task-new>\n        <task-list></task-list>\n    </div>\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);
